@@ -4,7 +4,9 @@
       class="mx-auto"
       :width="width"
     >
+      <v-card-text>
       <slot name="content"></slot>
+      </v-card-text>
     </v-card>
   </div>
 </template>
