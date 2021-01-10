@@ -24,6 +24,5 @@ export default {
   display: flex;
   align-items: center;
   height: 100vh;
-  background-color: #c7c7c7;
 }
 </style>
