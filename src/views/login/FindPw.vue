@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 
@@ -62,7 +63,10 @@ export default {
   },
   methods: {
     sendNewPw(){
-      this.$refs.form.validate()
+      if(this.$refs.form.validate()) {
+        this.$router.replace('login');
+        bus.$emit('on:snack-bar', '비밀번호 변경 성공');
+      }
     },
   }
 }
