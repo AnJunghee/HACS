@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 #app{
-  background-color: #c7c7c7;
+  background-color: #ebebeb;
 }
 /* Router Transition */
 .routing-fade-enter-active, .routing-fade-leave-active {
