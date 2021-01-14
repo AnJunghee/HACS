@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "emailjs-com": "^2.6.4",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.13.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
