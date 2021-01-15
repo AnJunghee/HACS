@@ -3,6 +3,7 @@
     <template v-slot:content>
       <logo></logo>
 
+
     <form class="contact-form" @submit.prevent="sendEmail">
     <div style="padding-left: 22px">
     <fieldset>
@@ -20,12 +21,15 @@
     <br>
     <input type="submit" value="비밀번호 찾기" class="submit" style="margin-left : 17px">
   </form>
+
     </template>
   </login-box>
 </template>
 
 <script>
+
 import emailjs from 'emailjs-com'
+import bus from '@/utils/bus'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 
@@ -35,6 +39,7 @@ export default {
   components: {
     Logo, LoginBox,
   },
+
   methods: {
     sendEmail: (e) => {
       emailjs.sendForm('Kong_email', 'template_776wqjg', e.target, 'user_pX0wfFfQUvxPyoTvUpNha')
@@ -46,6 +51,7 @@ export default {
             alert('아이디,이메일을 확인해주세요');
         });
     }
+
   }
 }
 </script>
