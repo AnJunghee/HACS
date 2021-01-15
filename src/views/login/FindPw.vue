@@ -28,8 +28,6 @@
 
 <script>
 
-import emailjs from 'emailjs-com'
-import bus from '@/utils/bus'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 
@@ -41,16 +39,16 @@ export default {
   },
 
   methods: {
-    sendEmail: (e) => {
-      emailjs.sendForm('Kong_email', 'template_776wqjg', e.target, 'user_pX0wfFfQUvxPyoTvUpNha')
-        .then((result) => {
-            console.log('SUCCESS!', result.status, result.text);
-            alert('입력하신 e-mail로 새로운 비밀번호를 전송했습니다. 확인하고 다시 로그인 해주세요. ');
-        }, (error) => {
-            console.log('FAILED...', error);
-            alert('아이디,이메일을 확인해주세요');
-        });
-    }
+    // sendEmail: (e) => {
+    //   emailjs.sendForm('Kong_email', 'template_776wqjg', e.target, 'user_pX0wfFfQUvxPyoTvUpNha')
+    //     .then((result) => {
+    //         console.log('SUCCESS!', result.status, result.text);
+    //         alert('입력하신 e-mail로 새로운 비밀번호를 전송했습니다. 확인하고 다시 로그인 해주세요. ');
+    //     }, (error) => {
+    //         console.log('FAILED...', error);
+    //         alert('아이디,이메일을 확인해주세요');
+    //     });
+    // }
 
   }
 }
