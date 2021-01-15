@@ -4,7 +4,9 @@
       class="mx-auto"
       :width="width"
     >
+      <v-card-text>
       <slot name="content"></slot>
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -22,6 +24,5 @@ export default {
   display: flex;
   align-items: center;
   height: 100vh;
-  background-color: #c7c7c7;
 }
 </style>
