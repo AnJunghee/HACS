@@ -2,75 +2,70 @@
   <login-box :width="344">
     <template v-slot:content>
       <logo></logo>
-
-
-    <form class="contact-form" @submit.prevent="sendEmail">
-    <div style="padding-left: 22px">
-    <fieldset>
-    <legend>아이디</legend>
-    <input type="text" name="user_name" class="text">
-    </fieldset>
-    </div>
-    <br>
-    <div style="padding-left: 22px">
-    <fieldset>
-    <legend>이메일</legend>
-    <input type="email" name="user_email" class="text">
-    </fieldset>
-    </div>
-    <br>
-    <input type="submit" value="비밀번호 찾기" class="submit" style="margin-left : 17px">
-  </form>
-
+      <p>회원 아이디와 비밀번호를 입력하시면 가입하신 이메일로 <strong>임시 비밀번호</strong>가 발송됩니다.</p>
+        <v-form ref="form" 
+          lazy-validation 
+          v-model="valid"
+        >
+          <v-text-field
+            v-model="id"
+            label="아이디"
+            :rules="idRules"
+            required
+            outlined
+            dense
+          ></v-text-field>
+          <v-text-field
+            v-model="email"
+            label="이메일"
+            :rules="emailRules"
+            required
+            outlined
+            dense
+          ></v-text-field>
+          <v-btn
+            :disabled="!valid"
+            color="primary"
+            block
+            @click="sendNewPw"
+          >비밀번호 찾기</v-btn>
+        </v-form>
     </template>
   </login-box>
 </template>
 
 <script>
-
+import bus from '@/utils/bus'
+import { validateEmail } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
-
 
 export default {
   name: 'find_pw',
   components: {
     Logo, LoginBox,
   },
-
+  data() {
+    return{
+      valid: true,
+      id: '',
+      email: '',
+      idRules: [
+        v => !!v || '아이디를 입력해주세요.',
+      ],
+      emailRules: [
+        v => !!v || '이메일을 입력해주세요.',
+        v => validateEmail(v),
+      ],
+    }
+  },
   methods: {
-    // sendEmail: (e) => {
-    //   emailjs.sendForm('Kong_email', 'template_776wqjg', e.target, 'user_pX0wfFfQUvxPyoTvUpNha')
-    //     .then((result) => {
-    //         console.log('SUCCESS!', result.status, result.text);
-    //         alert('입력하신 e-mail로 새로운 비밀번호를 전송했습니다. 확인하고 다시 로그인 해주세요. ');
-    //     }, (error) => {
-    //         console.log('FAILED...', error);
-    //         alert('아이디,이메일을 확인해주세요');
-    //     });
-    // }
-
-  }
+    sendNewPw(){
+      if(this.$refs.form.validate()) {
+        this.$router.replace('login');
+        bus.$emit('on:snack-bar', '변경된 비밀번호로 로그인을 시도해주세요.');
+      }
+    },
+  },
 }
 </script>
-
-
-<style>
-.text{
-  width: 280px;
-  margin-bottom: 8px;
-  margin-left: 10px
-}
-fieldset{
-  width: 300px;
-  border:grey solid 0.5px;
-  border-radius: 5px 5px 5px 5px;
-}
-.submit{
-  color : whitesmoke;
-  width: 310px;
-  border-radius: 5px 5px 5px 5px;
-  background-color: green;
-  margin-bottom:25px;
-}
-</style>

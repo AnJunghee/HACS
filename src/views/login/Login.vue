@@ -1,5 +1,5 @@
 <template>
-  <login-box :width="344">
+  <login-box :width="360">
     <template v-slot:content>
       <logo></logo>
       <div>
@@ -48,8 +48,10 @@ export default {
         return;
       } 
       if(this.user.password=='') {alert('비밀번호를 입력해주세요.');return;}
-      if(this.user.id=='admin' && this.user.password=='1234') {this.$router.push('thema');return;}
-      else {alert('회원 정보가 일치하지 않습니다. 다시 입력해주세요.');return;}
+      if(this.user.id=='admin' && this.user.password=='1234') {
+        this.$router.push('thema');
+        return;
+      } else {alert('회원 정보가 일치하지 않습니다. 다시 입력해주세요.');return;}
     },
     btn_findid: function() {
       this.$router.push('/find_id')
