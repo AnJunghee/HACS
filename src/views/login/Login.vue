@@ -22,7 +22,8 @@
           filled
         ></v-text-field>
         <v-btn 
-          color="primary" 
+          color="primary"
+          large
           block
           @click="login"
           :disabled="!valid"
