@@ -67,7 +67,7 @@ export default {
   margin-bottom: 5%;
 }
 input {
-  border: blue 1px solid;
+  border: tomato 1px solid;
   width: 130px;
 }
 .registNum {
