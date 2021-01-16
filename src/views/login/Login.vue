@@ -1,25 +1,39 @@
 <template>
-  <login-box :width="360">
+  <login-box :width="400">
     <template v-slot:content>
       <logo></logo>
-      <div>
+      <v-form ref="form" 
+        lazy-validation 
+        v-model="valid"
+      >
         <v-text-field
-          label="ID" prepend-icon="mdi-account"
-          placeholder="아이디를 입력하세요"
-          v-model="user.id"
-          filled></v-text-field>
+          label="ID" 
+          prepend-icon="mdi-account"
+          v-model="id"
+          :rules="idRules"
+          filled
+        ></v-text-field>
         <v-text-field 
-          label="PASSWORD" type="password" prepend-icon="mdi-lock"
-          placeholder="비밀번호를 입력하세요"
-          v-model="user.password"
-          filled></v-text-field>
-      <v-btn block v-on:click="login()">로그인</v-btn>
-      </div>
-      <div>
-        <v-btn text v-on:click="btn_findid">아이디 찾기 </v-btn>
-        <v-btn text v-on:click="btn_findpw">비밀번호 찾기</v-btn>
-        <v-btn text v-on:click="btn_signup">회원가입</v-btn>
-      </div>
+          label="PASSWORD" 
+          type="password" 
+          prepend-icon="mdi-lock"
+          v-model="pw"
+          :rules="pwRules"
+          filled
+        ></v-text-field>
+        <v-btn 
+          color="primary" 
+          block
+          @click="login"
+          :disabled="!valid"
+        >로그인
+        </v-btn>
+      </v-form>
+    </template>
+    <template v-slot:actions>
+      <v-btn text color="primary" @click="btnFindid">아이디 찾기</v-btn>
+      <v-btn text color="primary" @click="btnFindpw">비밀번호 찾기</v-btn>
+      <v-btn text color="primary" @click="btnSignup">회원가입</v-btn>
     </template>
   </login-box>
 </template>
@@ -35,33 +49,32 @@ export default {
   },
   data() {
     return {
-      user : {
-        id : '',
-        password : ''
-      }
+      valid: true,
+      id : '',
+      pw : '',
+      idRules: [
+        v => !!v || '아이디를 입력해주세요.',
+      ],
+      pwRules: [
+        v => !!v || '비밀번호를 입력해주세요.',
+      ],
     }
   },
   methods: {
-    login : function() {
-      if(this.user.id=='') {
-        alert('아이디를 입력해주세요.');
-        return;
-      } 
-      if(this.user.password=='') {alert('비밀번호를 입력해주세요.');return;}
-      if(this.user.id=='admin' && this.user.password=='1234') {
-        this.$router.push('thema');
-        return;
-      } else {alert('회원 정보가 일치하지 않습니다. 다시 입력해주세요.');return;}
+    login() {
+      if(this.$refs.form.validate()) {
+        this.$router.replace('thema');
+      }
     },
-    btn_findid: function() {
-      this.$router.push('/find_id')
+    btnFindid() {
+      this.$router.push('find_id')
     },
-    btn_findpw: function() {
-      this.$router.push('/find_pw')
+    btnFindpw() {
+      this.$router.push('find_pw')
     },
-    btn_signup: function() {
-      this.$router.push('/signup')
-    }
+    btnSignup() {
+      this.$router.push('signup')
+    },
   },
 }
 </script>
