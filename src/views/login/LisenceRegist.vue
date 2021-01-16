@@ -33,13 +33,13 @@ import LoginBox from '@/components/LoginBox'
 export default {
   name: 'lisence_regist',
   components: {
-    Logo, LoginBox
+    Logo, LoginBox,
   },
   data () {
     return {
       registNum1: "",
       registNum2: "",
-      registNum3: ""
+      registNum3: "",
     }
   },
   methods: {
@@ -47,11 +47,15 @@ export default {
       if(this.registNum1 != "1111" && this.registNum2 != "2222" && this.registNum3 != "3333"){
         alert('인증키를 다시 확인해 주세요');
       }
+      if(this.registNum1 != "1111" && this.registNum2 != "2222" && this.registNum3 != "3333"){
+        alert('인증키를 다시 확인해 주세요');
+      }
     }
-  }
+  },
+
 }
 </script>
-<style>
+<style scoped>
 .product_Info {
   width: 400px;
   height: 300px;

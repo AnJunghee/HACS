@@ -30,6 +30,9 @@ import LoginBox from '@/components/LoginBox'
 
 export default {
   name: 'login',
+  components: {
+    Logo, LoginBox,
+  },
   data() {
     return {
       user : {
@@ -39,24 +42,24 @@ export default {
     }
   },
   methods: {
-      login : function() {
-        if(this.user.id=='') {alert('아이디를 입력해주세요.');return;} 
-        if(this.user.password=='') {alert('비밀번호를 입력해주세요.');return;}
-        if(this.user.id=='admin' && this.user.password=='1234') {this.$router.push('thema');return;}
-        else {alert('회원 정보가 일치하지 않습니다. 다시 입력해주세요.');return;}
-      },
-      btn_findid: function() {
-        this.$router.push('/find_id')
-      },
-      btn_findpw: function() {
-        this.$router.push('/find_pw')
-      },
-      btn_signup: function() {
-        this.$router.push('/signup')
-      }
-  },
-  components: {
-    Logo, LoginBox,
+    login : function() {
+      if(this.user.id=='') {
+        alert('아이디를 입력해주세요.');
+        return;
+      } 
+      if(this.user.password=='') {alert('비밀번호를 입력해주세요.');return;}
+      if(this.user.id=='admin' && this.user.password=='1234') {this.$router.push('thema');return;}
+      else {alert('회원 정보가 일치하지 않습니다. 다시 입력해주세요.');return;}
+    },
+    btn_findid: function() {
+      this.$router.push('/find_id')
+    },
+    btn_findpw: function() {
+      this.$router.push('/find_pw')
+    },
+    btn_signup: function() {
+      this.$router.push('/signup')
+    }
   },
 }
 </script>
