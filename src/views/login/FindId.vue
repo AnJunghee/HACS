@@ -52,8 +52,8 @@ export default {
       if(this.$refs.form.validate()) {
         // 팝업 보여주고
         // 이동
-        this.$router.replace('login');
-        bus.$emit('on:snack-bar', '확인하신 아이디로 로그인을 시도해주세요.');
+        this.$router.replace('login')
+        bus.$emit('on:snack-bar', '확인하신 아이디로 로그인을 시도해주세요.')
       }
     },
   },

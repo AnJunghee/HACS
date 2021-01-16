@@ -62,8 +62,8 @@ export default {
   methods: {
     sendNewPw(){
       if(this.$refs.form.validate()) {
-        this.$router.replace('login');
-        bus.$emit('on:snack-bar', '변경된 비밀번호로 로그인을 시도해주세요.');
+        this.$router.replace('login')
+        bus.$emit('on:snack-bar', '변경된 비밀번호로 로그인을 시도해주세요.')
       }
     },
   },

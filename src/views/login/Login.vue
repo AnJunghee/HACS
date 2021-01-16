@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 
@@ -64,7 +65,8 @@ export default {
   methods: {
     login() {
       if(this.$refs.form.validate()) {
-        this.$router.replace('thema');
+        this.$router.push('thema')
+        bus.$emit('on:snack-bar', '로그인에 성공하였습니다.')
       }
     },
     btnFindid() {
