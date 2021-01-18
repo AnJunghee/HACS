@@ -1,16 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// 테마(HOME)
-import Thema from '@/views/Thema'
-// 로그인 영역
-import Login from '@/views/login/Login';
-import LisenceRegist from '@/views/login/LisenceRegist'
-import FindId from '@/views/login/FindId'
-import FindPw from '@/views/login/FindPw'
-import SignUp from '@/views/login/SignUp'
-// 인사(HR) 영역
-import HrEmp from '@/views/hr/HrEmp'
-
 
 Vue.use(VueRouter)
 
@@ -22,37 +11,37 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: () => import('@/views/login/Login'),
   },
   {
     path: '/lisence_regist',
     name: 'LisenceRegist',
-    component: LisenceRegist,
+    component: () => import('@/views/login/LisenceRegist'),
   },
   {
     path: '/find_id',
     name: 'FindId',
-    component: FindId,
+    component: () => import('@/views/login/FindId'),
   },
   {
     path: '/find_pw',
     name: 'FindPw',
-    component: FindPw,
+    component: () => import('@/views/login/FindPw'),
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp,
+    component: () => import('@/views/login/SignUp'),
   },
   {
     path: '/thema',
     name: 'Thema',
-    component: Thema
+    component: () => import('@/views/Thema'),
   },
   {
     path: '/hr_emp',
     name: 'hr_emp',
-    component: HrEmp,
+    component: () => import('@/views/hr/HrEmp'),
   },
 ]
 
