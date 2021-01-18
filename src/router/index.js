@@ -43,6 +43,10 @@ const routes = [
     name: 'hr_emp',
     component: () => import('@/views/hr/HrEmp'),
   },
+  {
+    path: '*',
+    component: () => import('@/views/PageNotFound'),
+  },
 ]
 
 const router = new VueRouter({
