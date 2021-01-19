@@ -30,20 +30,26 @@
             @click="sendNewPw"
           >비밀번호 찾기</v-btn>
         </v-form>
+        <modal 
+        :show="modal.show"
+        :title="modal.title"
+        :content="modal.content"
+        :redirect="modal.redirect"
+      ></modal>
     </template>
   </login-box>
 </template>
 
 <script>
-import bus from '@/utils/bus'
 import { validateEmail } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'find_pw',
   components: {
-    Logo, LoginBox,
+    Logo, LoginBox, Modal,
   },
   data() {
     return{
@@ -57,13 +63,18 @@ export default {
         v => !!v || '이메일을 입력해주세요.',
         v => validateEmail(v),
       ],
+      modal: {
+        show: false,
+        title: '비밀번호 찾기',
+        content: '입력한 이메일로 임시 비밀번호를 발송했습니다.',
+        redirect: 'login',
+      }
     }
   },
   methods: {
     sendNewPw(){
       if(this.$refs.form.validate()) {
-        this.$router.replace('login')
-        bus.$emit('on:snack-bar', '변경된 비밀번호로 로그인을 시도해주세요.')
+        this.modal.show = true;
       }
     },
   },
