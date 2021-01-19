@@ -19,23 +19,29 @@
           :disabled="!valid"
           color="primary"
           block
-          @click="sendNewPw"
-        >비밀번호 찾기</v-btn>
+          @click="sendNewId"
+        >아이디 찾기</v-btn>
       </v-form>
+      <modal 
+        :show="modal.show"
+        :title="modal.title"
+        :content="modal.content"
+        :redirect="modal.redirect"
+      ></modal>
     </template>
   </login-box>
 </template>
 
 <script>
-import bus from '@/utils/bus'
 import { validateEmail } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'find_id',
   components: {
-    Logo, LoginBox,
+    Logo, LoginBox, Modal,
   },
   data() {
     return{
@@ -45,15 +51,18 @@ export default {
         v => !!v || '이메일을 입력해주세요.',
         v => validateEmail(v),
       ],
+      modal: {
+        show: false,
+        title: '아이디 찾기',
+        content: '아이디는 xxx입니다.',
+        redirect: 'login',
+      } 
     }
   },
   methods: {
-    sendNewPw(){
+    sendNewId(){
       if(this.$refs.form.validate()) {
-        // 팝업 보여주고
-        // 이동
-        this.$router.replace('login')
-        bus.$emit('on:snack-bar', '확인하신 아이디로 로그인을 시도해주세요.')
+        this.modal.show = true;
       }
     },
   },
