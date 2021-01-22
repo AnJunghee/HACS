@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import { validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 
@@ -97,25 +98,27 @@ export default {
       ],
       password: '',
       passwordRules: [
-        v => /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/.test(v) || '최소 6 자, 최대 20 자, 최소 하나의 문자, 하나의 숫자 ',
+        v => validatePassword(v),
       ],
       checkPassword: '',
       checkPasswordRules: [
-        v => !!v || '비밀번호를 다시 입력해주세요',
-        /* v => this.password === this.checkPassword || '비밀번호가 일치하지 않습니다.'*/
+        v => !!v || '비밀번호를 다시 입력해주세요.',
+        v => v===this.password || '비밀번호가 일치하지 않습니다.'
       ],
       userName: '',
       userNameRules: [
         v => !!v || '이름을 입력해주세요.',
-        v => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(v) || '옳바른 형식이 아닙니다.'
+        v => validateName(v),
       ],
       email: '',
       emailRules: [
-        v => !!(v || '').match(/@/) || '이메일 형식으로 작성해주세요.',
+        v => !!v || '이메일을 입력해주세요',
+        v => validateEmail(v),
       ],
       phone: '',
       phoneRules: [
-        v => !!(v || '').match(/^\d{2,3}\d{3,4}\d{4}$/) || '전화번호를 입력해주세요.',
+        v => !!v || '전화번호를 입력해주세요.',
+        v => validatePhone(v),
       ],
       adress: '',
       adressRules: [
@@ -136,15 +139,7 @@ export default {
         this.reset();
       },
       clear () {
-        this.id = ''
-        this.password = ''
-        this.passwordConfirm = ''
-        this.userName = ''
-        this.email = ''
-        this.phone = ''
-        this.adress = ''
-        this.detailAaddress = ''
-        this.$refs.observer.reset()
+        this.$refs.form.reset()
       },
     },
 }
