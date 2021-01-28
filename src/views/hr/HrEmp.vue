@@ -64,13 +64,18 @@
       </v-list-item-group>
     </v-navigation-drawer>
     <v-main>
-      asdfadsf
+      <emp-list></emp-list>
     </v-main>
   </div>
 </template>
 
 <script>
+import EmpList from '@/components/hr/EmpList';
+
 export default {
+  components: {
+    EmpList
+  },
   data: () => ({
     drawer: false,
     group: null,
