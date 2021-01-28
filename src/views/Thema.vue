@@ -2,16 +2,17 @@
   <login-box :width="1000">
     <template v-slot:content>
       <v-container>
-        <v-row class="mb-6">
-          <h1>로고</h1>
-          <v-spacer/>
-          <div>
-            <span>안녕하세요 ㅇㅇ님 </span>
-            <v-btn
+        <v-row class="mb-6" no-gutters>
+          <v-col class="d-flex align-center">
+            <h1>로고</h1>
+          </v-col>
+          <v-col class="d-flex align-center" offset-md="6">
+            <h2>안녕하세요 <span class="primary--text">{{ $store.state.user.username }}</span>님</h2>
+          </v-col>
+          <v-btn
               outlined
               @click="btnLogout"
-            >로그아웃</v-btn>
-          </div>
+            >로그아웃</v-btn>       
         </v-row>
         <v-row no-gutters>
           <template v-for="(item, idx) in thema">
