@@ -1,48 +1,37 @@
 <template>
   <login-box :width="1000">
-
     <template v-slot:content>
-        
-        <div style='width:250px; float:right'>
-          <span>안녕하세요 ㅇㅇ님 </span>
-          <v-btn
-            outlined
-            @click="btnLogout"
-          >로그아웃</v-btn>
-        </div>
-
-        <br>
-        <br>
-
-        <div>
-          <v-btn
-            outlined
-            height="300px"
-            width="484px"
-            @click="btn1"
-          >인사</v-btn>
-          <v-btn
-            outlined
-            height="300px"
-            width="484px"
-            @click="btn2"
-          >회계</v-btn>
-          <v-btn
-            outlined
-            height="300px"
-            width="484px"
-            @click="btn3"
-          >편의</v-btn> 
-          <v-btn
-            outlined
-            height="300px"
-            width="484px"
-            @click="btn4"
-          >시스템관리</v-btn>
-          
-        </div>
-
-
+      <v-container>
+        <v-row class="mb-6">
+          <h1>로고</h1>
+          <v-spacer/>
+          <div>
+            <span>안녕하세요 ㅇㅇ님 </span>
+            <v-btn
+              outlined
+              @click="btnLogout"
+            >로그아웃</v-btn>
+          </div>
+        </v-row>
+        <v-row no-gutters>
+          <template v-for="(item, idx) in thema">
+            <v-col :key="idx">
+              <v-btn
+                tile
+                outlined
+                width="100%"
+                height="30vh"
+                @click="$router.push(item.link)"
+              >{{ item.value }}</v-btn>
+            </v-col>
+            <v-responsive
+              v-if="idx === 1"
+              :key="`width-${idx}`"
+              width="100%"
+            ></v-responsive>
+          </template>
+        </v-row>
+      </v-container>
     </template>
   </login-box>
 </template>
@@ -56,20 +45,18 @@ export default {
   components: {
    LoginBox,
   },
+  data(){
+    return{
+      thema: [
+        {value: "인사", link: "login"},
+        {value: "회계", link: "login"},
+        {value: "편의", link: "login"},
+        {value: "시스템 관리", link: "login"},
+      ]
+    }
+  },
   methods : {
     btnLogout() {
-      this.$router.push('Login')
-    },
-    btn1(){
-      this.$router.push('Login')
-    },
-    btn2(){
-      this.$router.push('Login')
-    },
-    btn3(){
-      this.$router.push('Login')
-    },
-    btn4(){
       this.$router.push('Login')
     },
   },
