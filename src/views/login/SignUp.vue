@@ -6,16 +6,15 @@
         lazy-validation 
         v-model="valid"
       >
-        <v-row>
-          <v-subheader>아이디</v-subheader>
+        <v-row class="mr-3" no-gutters>
+          <v-subheader class="subheader">아이디</v-subheader>
           <v-text-field 
             v-model="id"
             :rules="idRules"
-            style="width: 100px; display: inline-block"
           ></v-text-field>
           <v-btn class="idOverlap_btn" depressed color="primary" v-on:click="idOverlap">ID 중복확인</v-btn> 
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>비밀번호</v-subheader>
           <v-text-field
             v-model="password"
@@ -25,7 +24,7 @@
             @click:append="show1 = !show1"
           ></v-text-field>
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>비밀번호 확인</v-subheader>
           <v-text-field
             v-model="checkPassword"
@@ -35,14 +34,14 @@
             @click:append="show2 = !show2"
           ></v-text-field>
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>이름</v-subheader> 
           <v-text-field
             v-model="userName"
             :rules="userNameRules"
           ></v-text-field>
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>이메일</v-subheader>
           <v-text-field
             v-model="email"
@@ -50,7 +49,7 @@
             type="email"
           ></v-text-field>
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>연락처</v-subheader>
           <v-text-field
             v-model="phone"
@@ -59,7 +58,7 @@
           ></v-text-field>
         </v-row>
 
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>생년월일</v-subheader>
           <v-menu
             ref="menu"
@@ -89,7 +88,7 @@
           </v-menu>
         </v-row>
 
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>우편번호</v-subheader>
           <v-text-field 
                 v-model="postcode"
@@ -97,10 +96,9 @@
                 disabled="false"
                 style="width: 200px; display: inline-block"
             ></v-text-field>
-          <v-btn class="adress_btn" depressed color="primary" @click="DaumPostcode" style="margin-right: 20px">우편번호</v-btn>
+          <v-btn class="adress_btn" depressed color="primary" @click="DaumPostcode">우편번호</v-btn>
         </v-row>
-        <v-row
-          style="margin-top: 5px">
+        <v-row class="mr-3" no-gutters>
           <v-subheader>주소</v-subheader>
           <v-text-field 
               v-model="adress"
@@ -110,7 +108,7 @@
               style="width: 300px; display: inline-block"
           ></v-text-field>
         </v-row>
-        <v-row>
+        <v-row class="mr-3" no-gutters>
           <v-subheader>상세주소</v-subheader>
           <v-text-field 
               v-model="detailAddress"
@@ -122,7 +120,7 @@
           ></v-text-field>
         </v-row>
         <v-btn
-          class="signUp_btn"
+          class="signUp_btn mr-3 mt-2"
           :disabled="!valid"
           type="submit"
           color="success"
@@ -131,7 +129,7 @@
           회원가입
         </v-btn>
         <v-btn 
-         class="clear_btn"
+         class="ml-3 mt-2"
           color="error"
           @click="clear">
           다시 작성
@@ -142,6 +140,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus'
 import {validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
@@ -211,11 +210,10 @@ export default {
   },
   methods: {
     submit () {
-      if (!this.$refs.form.validate()) {
-        return;
+      if (this.$refs.form.validate()) {
+        this.$router.push('login')
+        bus.$emit('on:snack-bar', '회원가입에 성공하였습니다.')
       }
-      alert('회원가입 성공');
-      this.reset();
     },
     clear () {
       this.$refs.form.reset()
@@ -231,21 +229,9 @@ export default {
 
 <style scoped>
   .signUp_btn {
-    float: right;
-    margin-right: 5px;
-    margin-top: 20px;
-  }
-  .clear_btn {
-    margin-top: 20px;
+  float: right;
   }
   .idOverlap_btn {
     width: 100px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  .adress_btn {
-    width: 90px;
-    margin-left: 20px;
-    margin-bottom: 20px;
   }
 </style>
