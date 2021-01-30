@@ -21,14 +21,19 @@
       <v-text-field
         outlined
         v-model="registNum1"
+        style="width: 148px; display: inline-block"
       ></v-text-field>
+      -
       <v-text-field
         outlined
         v-model="registNum2"
+        style="width: 148px; display: inline-block"
       ></v-text-field>
+      -
       <v-text-field
         outlined
         v-model="registNum3"
+        style="width: 148px; display: inline-block"
       ></v-text-field>
 
         <v-btn
