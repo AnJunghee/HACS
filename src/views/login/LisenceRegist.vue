@@ -18,19 +18,25 @@
       오류 발생 시 문의 전화번호 000-0000-0000<br>
       </v-sheet>
 
-      <v-form>
-        <div class="registNum">
-        <input v-model="registNum1"> - <input v-model="registNum2"> - <input v-model="registNum3">
-        <br>
-        <br>
-        </div>
+      <v-text-field
+        outlined
+        v-model="registNum1"
+      ></v-text-field>
+      <v-text-field
+        outlined
+        v-model="registNum2"
+      ></v-text-field>
+      <v-text-field
+        outlined
+        v-model="registNum3"
+      ></v-text-field>
+
         <v-btn
           block
           color="primary"
           outlined
           @click="lisence"
         >인증키 등록</v-btn>
-      </v-form>
     
     </template>
   </login-box>
@@ -54,8 +60,11 @@ export default {
   },
   methods: {
     lisence() {
-      if(this.registNum1 != "1111" && this.registNum2 != "2222" && this.registNum3 != "3333"){
+      if(this.registNum1 != "1111" || this.registNum2 != "2222" || this.registNum3 != "3333"){
         alert('인증키를 다시 확인해 주세요')
+      }
+      else{
+        alert('인증키 성공')
       }
     },
   },
@@ -63,12 +72,5 @@ export default {
 }
 </script>
 <style scoped>
-input {
-  border: rgb(42, 73, 214) 1px solid;
-  width: 130px;
-}
-.registNum {
-  margin-left : 6%;
-  margin-top : 5%;
-}
+
 </style>
