@@ -31,10 +31,6 @@ export default {
     content: String,
     redirect: String,
   },
-  data () {
-    return {
-    }
-  },
   methods: {
     btnOkClick(){
       this.show = !this.show;

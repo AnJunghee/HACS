@@ -91,21 +91,21 @@
         <v-row class="mr-3" no-gutters>
           <v-subheader>우편번호</v-subheader>
           <v-text-field 
-                v-model="postcode"
-                :rules="postcodeRules"
-                disabled="false"
-                style="width: 200px; display: inline-block"
-            ></v-text-field>
-          <v-btn class="adress_btn" depressed color="primary" @click="DaumPostcode">우편번호</v-btn>
+            v-model="postcode"
+            readonly
+            style="width: 200px; display: inline-block"
+            @click="postcodeModalShow = true"
+          ></v-text-field>
+          <v-btn class="address_btn" depressed color="primary" @click="postcodeModalShow = true">우편번호</v-btn>
         </v-row>
         <v-row class="mr-3" no-gutters>
           <v-subheader>주소</v-subheader>
           <v-text-field 
-              v-model="adress"
-              :rules="adressRules"
-              label="우편번호를 검색해주세요"
-              disabled
-              style="width: 300px; display: inline-block"
+            v-model="address"
+            :rules="addressRules"
+            readonly
+            style="width: 300px; display: inline-block"
+            @click="postcodeModalShow = true"
           ></v-text-field>
         </v-row>
         <v-row class="mr-3" no-gutters>
@@ -135,6 +135,10 @@
           다시 작성
         </v-btn>
       </v-form>
+      <post-code 
+        :show="postcodeModalShow"
+        @getPostCode="getPostCode"
+      ></post-code>
     </template>
   </login-box>
 </template>
@@ -144,11 +148,12 @@ import bus from '@/utils/bus'
 import { validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
+import PostCode from '@/components/login/PostCode'
 
 export default {
   name: 'signup',
   components: {
-    Logo, LoginBox,
+    Logo, LoginBox, PostCode,
   },
   data () {
     return {
@@ -189,10 +194,8 @@ export default {
       birthdayRules: [
         v => !!v || '생년월일을 입력해주세요.',
       ],
-      adress: '',
-      adressRules: [
-
-      ],
+      postcode: '',
+      postcodeModalShow: false,
       detailAaddress: '',
       detailAaddressRules: [
 
@@ -209,6 +212,11 @@ export default {
       },
   },
   methods: {
+    getPostCode(data){
+      this.postcode = data.result.zonecode;
+      this.address = data.result.address;
+      this.postcodeModalShow = data.show;
+    },
     submit () {
       if (this.$refs.form.validate()) {
         this.$router.push('login')
@@ -219,8 +227,8 @@ export default {
       this.$refs.form.reset()
     },
     save (birthday) {
-        this.$refs.menu.save(birthday)
-      },
+      this.$refs.menu.save(birthday)
+    },
   },
 }
 
