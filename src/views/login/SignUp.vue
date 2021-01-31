@@ -12,7 +12,7 @@
             v-model="id"
             :rules="idRules"
           ></v-text-field>
-          <v-btn class="idOverlap_btn" depressed color="primary" v-on:click="idOverlap">ID 중복확인</v-btn> 
+          <v-btn class="idOverlap_btn" depressed color="primary">ID 중복확인</v-btn> 
         </v-row>
         <v-row class="mr-3" no-gutters>
           <v-subheader>비밀번호</v-subheader>
@@ -104,7 +104,7 @@
               v-model="adress"
               :rules="adressRules"
               label="우편번호를 검색해주세요"
-              disabled="false"
+              disabled
               style="width: 300px; display: inline-block"
           ></v-text-field>
         </v-row>
@@ -141,7 +141,7 @@
 
 <script>
 import bus from '@/utils/bus'
-import {validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
+import { validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 

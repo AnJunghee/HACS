@@ -22,6 +22,7 @@
                 outlined
                 width="100%"
                 height="30vh"
+                class="display-1"
                 @click="$router.push(item.link)"
               >{{ item.value }}</v-btn>
             </v-col>
@@ -64,6 +65,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.v-btn__content{
+  font-size: 3rem;
+}
 </style>

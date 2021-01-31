@@ -5,7 +5,7 @@ function validateEmail(email) {
 
 function validateName(name) {
   const re = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-  return re.test(name) || '유효하지 않은 이메일 입니다.';
+  return re.test(name) || '유효하지 않은 이름 입니다.';
 }
 
 function validatePassword(password) {
