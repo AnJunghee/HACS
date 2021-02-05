@@ -18,24 +18,14 @@
       오류 발생 시 문의 전화번호 000-0000-0000<br>
       </v-sheet>
 
-      <v-text-field
-        outlined
-        v-model="registNum1"
-        style="width: 148px; display: inline-block"
-      ></v-text-field>
-      -
-      <v-text-field
-        outlined
-        v-model="registNum2"
-        style="width: 148px; display: inline-block"
-      ></v-text-field>
-      -
-      <v-text-field
-        outlined
-        v-model="registNum3"
-        style="width: 148px; display: inline-block"
-      ></v-text-field>
 
+      <template v-for="(item, index) in registNum"> 
+            <v-text-field :key="index"
+             outlined
+             style="width: 148px; display: inline-block"
+            ></v-text-field>
+            -   
+      </template>
         <v-btn
           block
           color="primary"
@@ -58,14 +48,16 @@ export default {
   },
   data () {
     return {
-      registNum1: "",
-      registNum2: "",
-      registNum3: "",
+       registNum: [
+        {value: ""},
+        {value: ""},
+        {value: ""},
+      ]
     }
   },
   methods: {
     lisence() {
-      if(this.registNum1 != "1111" || this.registNum2 != "2222" || this.registNum3 != "3333"){
+      if(this.registNum != "1111" || this.registNum != "2222" || this.registNum != "3333"){
         alert('인증키를 다시 확인해 주세요')
       }
       else{
