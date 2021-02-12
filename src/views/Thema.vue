@@ -10,9 +10,9 @@
             <h2>안녕하세요 <span class="primary--text">{{ $store.state.user.username }}</span>님</h2>
           </v-col>
           <v-btn
-              outlined
-              @click="btnLogout"
-            >로그아웃</v-btn>       
+            outlined
+            @click="btnLogout"
+          >로그아웃</v-btn>  
         </v-row>
         <v-row no-gutters>
           <template v-for="(item, idx) in thema">
