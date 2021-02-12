@@ -39,9 +39,20 @@ const routes = [
     component: () => import('@/views/Thema'),
   },
   {
-    path: '/hr_emp',
-    name: 'hr_emp',
-    component: () => import('@/views/hr/HrEmp'),
+    path: '/hr',
+    redirect: '/hr/emp_list',
+    name: 'hr',
+    component: () => import('@/views/hr/HR'),
+    children: [
+      { path: 'emp_list', component: () => import('@/components/hr/EmpList') },
+      { path: 'emp_tmp', component: () => import('@/components/hr/EmpTmp') },
+      { path: 'commute', component: () => import('@/components/hr/Commute') },
+      { path: 'salary', component: () => import('@/components/hr/Salary') },
+      { path: 'vac_list', component: () => import('@/components/hr/VacList') },
+      { path: 'vac_request', component: () => import('@/components/hr/VacRequest') },
+      { path: 'vac_cnt', component: () => import('@/components/hr/VacCnt') },
+      { path: 'welfare_list', component: () => import('@/components/hr/WelfareList') },
+    ],
   },
   {
     path: '*',

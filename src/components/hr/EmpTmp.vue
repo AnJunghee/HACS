@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>급여</h1>
+    <h1>일용직</h1>
   </div>
 </template>
 
