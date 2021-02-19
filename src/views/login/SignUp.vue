@@ -5,122 +5,115 @@
       <v-form ref="form" 
         lazy-validation 
         v-model="valid"
+        style="width:350px; margin:0 auto"
       >
-        <v-row class="mr-3" no-gutters>
-          <v-subheader class="subheader">아이디</v-subheader>
+        <h3>아이디</h3>
+        <v-row no-gutters>
           <v-text-field 
             v-model="id"
             :rules="idRules"
           ></v-text-field>
           <v-btn class="idOverlap_btn" depressed color="primary">ID 중복확인</v-btn> 
         </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>비밀번호</v-subheader>
+        <h3>비밀번호</h3>
+        <v-text-field
+          v-model="password"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :rules="passwordRules"
+          :type="show1 ? 'text' : 'password'"
+          @click:append="show1 = !show1"
+        ></v-text-field>
+        <h3>비밀번호 확인</h3>
+        <v-text-field
+          v-model="checkPassword"
+          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+          :rules="checkPasswordRules"
+          :type="show2 ? 'text' : 'password'"
+          @click:append="show2 = !show2"
+        ></v-text-field>
+        <h3>이름</h3> 
+        <v-text-field
+          v-model="userName"
+          :rules="userNameRules"
+        ></v-text-field>
+        <h3>이메일</h3>
+        <v-text-field
+          v-model="email"
+          :rules="emailRules"
+          type="email"
+        ></v-text-field>
+        <h3>연락처</h3>
+        <v-text-field
+        v-model="phone"
+        :rules="phoneRules" 
+        placeholder="- 제외 입력"
+        ></v-text-field>
+        <h3>생년월일</h3>
+        <v-row no-gutters>
           <v-text-field
-            v-model="password"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
-            :type="show1 ? 'text' : 'password'"
-            @click:append="show1 = !show1"
+            class="mr-3"
+            v-model="birthYear"
+            :rules="birthYearRules"
+            style="width: 90px"
+            placeholder="년(4자리)"
+          ></v-text-field>
+          <v-select
+            class="mr-3"
+            v-model="birthMonth"
+            :rules="birthMonthRules"
+            :items="monthItems"
+            style="width: 90px"
+            label="월"
+          ></v-select>
+          <v-text-field
+            v-model="birthDay"
+            :rules="birthDayRules"
+            style="width: 90px"
+            placeholder="일"
           ></v-text-field>
         </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>비밀번호 확인</v-subheader>
-          <v-text-field
-            v-model="checkPassword"
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="checkPasswordRules"
-            :type="show2 ? 'text' : 'password'"
-            @click:append="show2 = !show2"
-          ></v-text-field>
-        </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>이름</v-subheader> 
-          <v-text-field
-            v-model="userName"
-            :rules="userNameRules"
-          ></v-text-field>
-        </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>이메일</v-subheader>
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            type="email"
-          ></v-text-field>
-        </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>연락처</v-subheader>
-          <v-text-field
-            v-model="phone"
-            :rules="phoneRules"
-            placeholder="- 제외 입력"
-          ></v-text-field>
-        </v-row>
-
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>생년월일</v-subheader>
-          <v-menu
-            ref="menu"
-            v-model="menu"
-            :close-on-content-click="false"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="birthday"
-                :rules="birthdayRules"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-                style="width: 200px; margin: 0;"
-              ></v-text-field>
+        <h3>성별</h3>
+        <v-radio-group
+          v-model="gender"
+          :rules="genderRules"
+          row
+        >
+          <v-radio value="male">
+            <template v-slot:label>
+              <div><strong>남성</strong></div>
             </template>
-            <v-date-picker
-              ref="picker"
-              v-model="birthday"
-              :max="new Date().toISOString().substr(0, 10)"
-              min="1950-01-01"
-              @change="save"
-            ></v-date-picker>
-          </v-menu>
-        </v-row>
-
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>우편번호</v-subheader>
+          </v-radio>
+          <v-radio value="female">
+            <template v-slot:label>
+              <div><strong>여성</strong></div>
+              </template>
+          </v-radio>
+        </v-radio-group>
+        <h3>우편번호</h3>
+        <v-row no-gutters>
           <v-text-field 
             v-model="postcode"
+            :rules="postcodeRules"
             readonly
             style="width: 200px; display: inline-block"
             @click="postcodeModalShow = true"
           ></v-text-field>
           <v-btn class="address_btn" depressed color="primary" @click="postcodeModalShow = true">우편번호</v-btn>
         </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>주소</v-subheader>
-          <v-text-field 
-            v-model="address"
-            :rules="addressRules"
-            readonly
-            style="width: 300px; display: inline-block"
-            @click="postcodeModalShow = true"
-          ></v-text-field>
-        </v-row>
-        <v-row class="mr-3" no-gutters>
-          <v-subheader>상세주소</v-subheader>
-          <v-text-field 
-              v-model="detailAddress"
-              :rules="detailAddressRules"
-          ></v-text-field>
-          <v-text-field 
-              v-model="extraAddress"
-              :rules="extraAddressRules"
-          ></v-text-field>
-        </v-row>
+        <h3>주소</h3>
+        <v-text-field 
+          v-model="address"
+          :rules="addressRules"
+          readonly
+          @click="postcodeModalShow = true"
+        ></v-text-field>
+        <h3>상세주소</h3>
+        <v-text-field 
+            v-model="detailAddress"
+            :rules="detailAddressRules"
+        ></v-text-field>
         <v-btn
-          class="signUp_btn mr-3 mt-2"
+          class="signUp_btn"
           :disabled="!valid"
           type="submit"
           color="success"
@@ -129,7 +122,6 @@
           회원가입
         </v-btn>
         <v-btn 
-         class="ml-3 mt-2"
           color="error"
           @click="clear">
           다시 작성
@@ -158,8 +150,6 @@ export default {
   data () {
     return {
       valid: true,
-      date: null,
-      menu: false,
       id: '',
       idRules: [
         v => !!v || '아이디를 입력해주세요.',
@@ -180,10 +170,30 @@ export default {
         v => !!v || '이름을 입력해주세요.',
         v => validateName(v),
       ],
+      
       email: '',
       emailRules: [
         v => !!v || '이메일을 입력해주세요',
         v => validateEmail(v),
+      ],
+      birthYear: '',
+      birthYearRules:[
+        v => !!v || '',
+      ],
+      birthMonth: '',
+      monthItems: [
+        '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
+      ],
+      birthMonthRules:[
+        v => !!v || '',
+      ],
+      birthDay: '',
+      birthDayRules:[
+        v => !!v || '',
+      ],
+      gender: '',
+      genderRules: [
+        v => !!v || '성별을 선택해주세요.',
       ],
       phone: '',
       phoneRules: [
@@ -195,21 +205,19 @@ export default {
         v => !!v || '생년월일을 입력해주세요.',
       ],
       postcode: '',
+      postcodeRules: [
+        v => !!v || '우편번호를 입력해주세요.',
+      ],
       postcodeModalShow: false,
-      detailAaddress: '',
-      detailAaddressRules: [
+      detailAddress: '',
+      detailAddressRules: [
 
       ],
-      extraAddress: '',
-      extraAddressRules: [
-        
-      ]
+      address: '',
+      addressRules: [
+        v => !!v || '주소를 입력해주세요.',
+      ],
     }    
-  },
-  watch: {
-      menu (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
   },
   methods: {
     getPostCode(data){
@@ -226,9 +234,6 @@ export default {
     clear () {
       this.$refs.form.reset()
     },
-    save (birthday) {
-      this.$refs.menu.save(birthday)
-    },
   },
 }
 
@@ -236,6 +241,11 @@ export default {
 </script>
 
 <style scoped>
+  .login-box{
+    display: flex;
+    align-items: center;
+    height: 150vh;
+  }
   .signUp_btn {
   float: right;
   }
