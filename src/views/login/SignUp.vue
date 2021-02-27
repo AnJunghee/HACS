@@ -137,7 +137,7 @@
 
 <script>
 import bus from '@/utils/bus'
-import { validateEmail, validateName, validatePassword, validatePhone } from '@/utils/validation'
+import { validateEmail, validateName, validatePassword, validatePhone, validateBithYear, validateBithDay } from '@/utils/validation'
 import Logo from '@/components/Logo'
 import LoginBox from '@/components/LoginBox'
 import PostCode from '@/components/login/PostCode'
@@ -179,6 +179,7 @@ export default {
       birthYear: '',
       birthYearRules:[
         v => !!v || '',
+        v => validateBithYear(v),
       ],
       birthMonth: '',
       monthItems: [
@@ -190,6 +191,7 @@ export default {
       birthDay: '',
       birthDayRules:[
         v => !!v || '',
+        v => validateBithDay(v),
       ],
       gender: '',
       genderRules: [
