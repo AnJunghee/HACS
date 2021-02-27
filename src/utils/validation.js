@@ -18,4 +18,14 @@ function validatePhone(phone) {
   return re.test(phone) || '유효하지 않은 전화번호 입니다.';
 }
 
-export { validateEmail, validateName, validatePassword, validatePhone };
+function validateBithYear(birthYear) {
+  const re = /^[0-9]{4}$/;
+  return re.test(birthYear) || '';
+}
+
+function validateBithDay(bithDay) {
+  const re = /^[0-9]{1,2}$/;
+  return re.test(bithDay) || '';
+}
+
+export { validateEmail, validateName, validatePassword, validatePhone, validateBithYear, validateBithDay };
