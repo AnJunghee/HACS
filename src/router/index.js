@@ -46,6 +46,7 @@ const routes = [
     children: [
       { path: 'emp_list', component: () => import('@/components/hr/EmpList') },
       { path: 'emp_tmp', component: () => import('@/components/hr/EmpTmp') },
+      { path: 'emp_tmp_regist', component: () => import('@/components/hr/EmpTmpRegist') },
       { path: 'commute', component: () => import('@/components/hr/Commute') },
       { path: 'salary', component: () => import('@/components/hr/Salary') },
       { path: 'vac_list', component: () => import('@/components/hr/VacList') },
