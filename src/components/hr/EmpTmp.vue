@@ -50,7 +50,10 @@
           ></v-text-field>
         </v-col>
         <v-btn
-          color="primary">
+          color="primary"
+          :disabled="!valid"
+          @click="tmpRegist"
+          >
           일용직 등록
         </v-btn>
       </v-card-title>
@@ -90,6 +93,7 @@
 export default {
   data () {
     return {
+      valid: true,
       position: '',
       part: '',
       nation: '',
@@ -319,6 +323,11 @@ export default {
         ],
        loading: false 
     }
+  },
+  methods: {
+    tmpRegist() {
+      this.$router.push('emp_tmp_regist')
+    },
   },
 }
 

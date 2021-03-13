@@ -109,8 +109,8 @@
         ></v-text-field>
         <h3>상세주소</h3>
         <v-text-field 
-            v-model="detailAddress"
-            :rules="detailAddressRules"
+          v-model="detailAddress"
+          :rules="detailAddressRules"
         ></v-text-field>
         <v-btn
           class="signUp_btn"
