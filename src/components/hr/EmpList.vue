@@ -3,7 +3,7 @@
 		<h3>추후 바로가기 버튼</h3>
      <v-card>
       <v-card-title>
-        <v-btn @click="empDetail">dd</v-btn>
+        
         <v-select
           v-model="position"
           class="mr-5"

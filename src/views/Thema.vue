@@ -50,7 +50,7 @@ export default {
   data(){
     return{
       thema: [
-        {value: "인사", link: "login"},
+        {value: "인사", link: "hr/emp_list"},
         {value: "회계", link: "login"},
         {value: "편의", link: "login"},
         {value: "시스템 관리", link: "login"},
